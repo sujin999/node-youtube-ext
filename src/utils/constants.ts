@@ -13,6 +13,8 @@ export const constants = {
                 film: "&sp=EgIQBA%253D%253D",
                 programme: "&sp=EgIQBQ%253D%253D",
             },
+            continuation:
+                "https://www.youtube.com/youtubei/v1/search?continuation=",
         },
         video: {
             base: (id: string) =>
