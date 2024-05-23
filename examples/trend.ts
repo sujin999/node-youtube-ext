@@ -1,9 +1,9 @@
-import { ChannelInfo, channelInfo, search } from "../src";
+import { ChannelInfo, channelInfo, trend } from "../src";
 
 const query = "방탄";
 
 const start = async () => {
-    const result = await search(query, 20);
+    const result = await trend(query, 20);
 
     console.dir(result.uniqueChannelIds.size);
     let channels: ChannelInfo[] = [];

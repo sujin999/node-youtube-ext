@@ -7,7 +7,7 @@ export * from "./extractStreamInfo";
 export * from "./getFormats";
 export * from "./cookies";
 export * as utils from "./utils";
-
+export * from "./trend";
 /**
  * Package version.
  */

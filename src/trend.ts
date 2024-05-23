@@ -7,12 +7,12 @@ import {
     mergeObj,
 } from "./utils";
 
-export interface SearchOptions {
+interface SearchOptions {
     requestOptions?: UndiciRequestOptions;
     filterType?: keyof typeof constants.urls.search.filters;
 }
 
-export interface SearchVideo {
+interface SearchVideo {
     title: string;
     id: string;
     url: string;
@@ -40,7 +40,7 @@ export interface SearchVideo {
     }[];
 }
 
-export interface SearchChannel {
+interface SearchChannel {
     name: string;
     id: string;
     url: string;
@@ -56,7 +56,7 @@ export interface SearchChannel {
     badges: string[];
 }
 
-export interface SearchPlaylist {
+interface SearchPlaylist {
     name: string;
     id: string;
     url: string;
@@ -74,7 +74,7 @@ export interface SearchPlaylist {
 /**
  * Search for videos, channels, playlists, etc...
  */
-export const search = async (
+export const trend = async (
     terms: string,
     limit: number = 0,
     options: SearchOptions = {}
@@ -101,7 +101,7 @@ export const search = async (
         options
     );
 
-    let url = constants.urls.search.base(terms);
+    let url = constants.urls.search.base2();
     if (
         options.filterType &&
         constants.urls.search.filters[options.filterType]
@@ -122,11 +122,9 @@ export const search = async (
     };
 
     let continuationToken: string | null = null;
-    let continuationCount = 0;
 
     // 무한 루프 방지용 변수 추가
     const maxExecutionTime = 20 * 60 * 1000; // 20분을 밀리초로 변환
-    const maxSearchCount = 20;
     const startTime = Date.now();
 
     do {
@@ -137,11 +135,6 @@ export const search = async (
             console.log("최대 실행 시간(20분)을 초과하여 루프를 종료합니다.");
             break;
         }
-        if (continuationCount > maxSearchCount) {
-            console.log("최대 검색 횟수(20회)를 초과하여 루프를 종료합니다.");
-            break;
-        }
-        continuationCount++;
 
         let data: string;
         try {
@@ -155,13 +148,16 @@ export const search = async (
 
         let contents: any;
         try {
-            console.log(data);
             const raw = data.substring(
                 data.lastIndexOf(
                     '"sectionListRenderer":{"contents":[{"itemSectionRenderer":'
                 ) + 58,
-                data.lastIndexOf('},{"continuationItemRenderer"')
+                data.lastIndexOf('},"watchEndpoint"')
+                //data.lastIndexOf('},{"continuationItemRenderer"')
+                // ,"watchEndpoint":
             );
+            // {"browseId":"FEtrending"}},"title":"최신","selected":true,"content":{"sectionListRenderer":{"contents":[{"itemSectionRenderer":
+            console.log(raw);
             contents = JSON.parse(raw)?.contents;
         } catch (err) {
             throw new Error(`Failed to parse contents from data. (${err})`);
@@ -307,4 +303,4 @@ export const search = async (
     return result;
 };
 
-export default search;
+export default trend;

@@ -6,6 +6,8 @@ export const constants = {
                 `${
                     constants.urls.base
                 }/results?search_query=${encodeURIComponent(terms)}`,
+            base2: () =>
+                `${constants.urls.base}/feed/trending?bp=6gQJRkVleHBsb3Jl`,
             filters: {
                 video: "&sp=EgIQAQ%253D%253D",
                 channel: "&sp=EgIQAg%253D%253D",

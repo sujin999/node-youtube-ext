@@ -1,6 +1,6 @@
 {
     "name": "@sujin999/youtube-ext",
-    "version": "1.1.26",
+    "version": "1.1.27",
     "description": "A simple YouTube scraper and downloader.",
     "main": "dist/index.js",
     "files": [
@@ -9,7 +9,7 @@
     "scripts": {
         "build": "rimraf dist && tsc",
         "docs": "typedoc && tsx ./scripts/docs",
-        "start": "ts-node examples/search.ts"
+        "start": "ts-node examples/trend.ts"
     },
     "keywords": [
         "youtube",
