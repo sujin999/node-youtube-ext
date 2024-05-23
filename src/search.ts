@@ -155,7 +155,6 @@ export const search = async (
 
         let contents: any;
         try {
-            console.log(data);
             const raw = data.substring(
                 data.lastIndexOf(
                     '"sectionListRenderer":{"contents":[{"itemSectionRenderer":'
